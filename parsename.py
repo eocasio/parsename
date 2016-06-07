@@ -24,11 +24,16 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+
+import re
+
 class NameParser(object):
     
     def __init__(self, full_name):
         
         self.prefixes = ["de","del","de la", "de lo", "de las", "de los" ]
+        
+        self.initial_regex = re.compile(r'^(\w\.|[A-Z])?$', re.U)
         
         self.first_name = ""
         self.middle_name = ""
@@ -43,6 +48,10 @@ class NameParser(object):
             self.name_parts = full_name.split()
         
         self.parse_name()
+    
+    def is_initial(self, part):
+        
+        return bool(self.initial_regex.match(part))
         
     def parse_name(self):
         """ Parsing puertorrican names """
@@ -57,16 +66,21 @@ class NameParser(object):
         active_prefix = False
         temp_name = ""
         temp_name_list = []
+        has_initial = False
         
         for part in remaining_parts:
             
+            if self.is_initial(part):
+                #~ temp_name_list.append(part)
+                has_initial = True
+                
             if active_prefix:
                 temp_name = temp_name + " " + part
                 if not (temp_name.lower() in self.prefixes):
                     active_prefix = False
                     temp_name_list.append(temp_name)
                     temp_name = ""                    
-            elif part.lower() == "de":
+            elif part.lower() in [ "de", "del" ]:
                 # Has prefix
                 temp_name = part
                 active_prefix = True
@@ -76,13 +90,17 @@ class NameParser(object):
         #~ print temp_name_list
         
         try:
-            if len(temp_name_list) >= 3:                
+            if len(temp_name_list) >= 3:               
                 self.middle_name = temp_name_list[0]
                 self.paternal_name = temp_name_list[1]
                 self.maternal_name = temp_name_list[2]
             else:
-                self.paternal_name = temp_name_list[0]
-                self.maternal_name = temp_name_list[1]
+                if has_initial:
+                    self.middle_name = temp_name_list[0]
+                    self.paternal_name = temp_name_list[1]
+                else:
+                    self.paternal_name = temp_name_list[0]
+                    self.maternal_name = temp_name_list[1]
                 
         except IndexError:
             pass
@@ -101,6 +119,10 @@ if __name__ == "__main__":
     "Jose Colón de la Torre",
     "Jose De los Angeles De Jesus",
     "Jose C. De los Angeles De Jesus",
+    "MARIA DEL C COSTA",
+    "CYNTHIA M. CHARLEMAGNE",
+    "MARIA DE L. DIAZ",
+    "JOHN JAMES MUNOZ ORTIZ"
     " ",
     ]
     
