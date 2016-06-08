@@ -119,12 +119,12 @@ if __name__ == "__main__":
     "Nestor García de Jesus",
     "Jose Colón de la Torre",
     "Jose De los Angeles De Jesus",
-    "Jose C. De los Angeles De Jesus",
+    "Mario C. De los Angeles De la Torres",
     "MARIA DEL C COSTA",
     "CYNTHIA M. CHARLESTONE",
     "MARIA DE L. DIAZ",
     "JOHN JAMES GONZALEZ ORTIZ",
-    "SONIALY A MC CLINT",
+    "SONIALY A MC CLINTOSH",
     "MARIA DE TORRES CRUZ",
     " ",
     ]
@@ -133,8 +133,6 @@ if __name__ == "__main__":
     for full_name in names:
         
         nm = NameParser(full_name)
-        print "first:", nm.first_name
-        print "middle:", nm.middle_name
-        print "paternal:", nm.paternal_name
-        print "maternal:",nm.maternal_name
-        print
+        print nm
+        print 
+
