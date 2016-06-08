@@ -31,7 +31,8 @@ class NameParser(object):
     
     def __init__(self, full_name):
         
-        self.prefixes = ["de","del","de la", "de lo", "de las", "de los",  "mc"]
+        self.prefixes = ["de la", "de lo", "de las", "de los"]
+        self.prefixes_start = [ "de", "del",  "mc"]
         
         self.initial_regex = re.compile(r'^(\w\.|[A-Z])?$', re.U)
         
@@ -80,7 +81,7 @@ class NameParser(object):
                     active_prefix = False
                     temp_name_list.append(temp_name)
                     temp_name = ""                    
-            elif part.lower() in [ "de", "del",  "mc"]:
+            elif part.lower() in self.prefixes_start:
                 # Has prefix
                 temp_name = part
                 active_prefix = True
@@ -120,10 +121,11 @@ if __name__ == "__main__":
     "Jose De los Angeles De Jesus",
     "Jose C. De los Angeles De Jesus",
     "MARIA DEL C COSTA",
-    "CYNTHIA M. CHARLEMAGNE",
+    "CYNTHIA M. CHARLESTONE",
     "MARIA DE L. DIAZ",
-    "JOHN JAMES MUNOZ ORTIZ",
-    "CYNTHIA A MC CLISH",
+    "JOHN JAMES GONZALEZ ORTIZ",
+    "SONIALY A MC CLINT",
+    "MARIA DE TORRES CRUZ",
     " ",
     ]
     
