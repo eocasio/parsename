@@ -10,6 +10,7 @@ This class was designed to deal with name prefixes common in Puerto Rico like "d
   3. paternal name (spanish: apellido paterno)
   4. maternal name (spanish: apellido materno)
  
-  It is not a full name parser, like [python-nameparser](https://github.com/derek73/python-nameparser), which I highly recommend for handling English names with titles and other suffixes and prefixes.  
+
+It is not a full name parser, like [python-nameparser](https://github.com/derek73/python-nameparser), which I highly recommend for handling English names with titles and other suffixes and prefixes.  
 
 This work is licensed under the BSD License.
