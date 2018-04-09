@@ -27,12 +27,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import re
 
+
 class NameParser(object):
     
     def __init__(self, full_name):
         
         self.prefixes = ["de la", "de lo", "de las", "de los"]
-        self.prefixes_start = [ "de", "del",  "mc"]
+        self.prefixes_start = [ "de", "del",  "mc", "san"]
         
         self.initial_regex = re.compile(r'^(\w\.|[A-Z])?$', re.U)
         
@@ -55,7 +56,7 @@ class NameParser(object):
         return bool(self.initial_regex.match(part))
         
     def parse_name(self):
-        """ Parsing puerto rican names """
+        """ Parsing names """
         
         name_parts = self.name_parts
         
@@ -126,8 +127,13 @@ if __name__ == "__main__":
     "JOHN JAMES GONZALEZ ORTIZ",
     "SONIALY A MC CLINTOSH",
     "MARIA DE TORRES CRUZ",
-    "Nestor del Valle",
-    " ",
+    "OSVALDO SAN ANTONIO RIVERA CRUZ",
+    "Javier Roberto Rosado San Antonio",
+    "Tania San Antonio Ocasio",
+    "ARLENE M. TORRES SANTA CRUZ",
+    "Octavio San Miguel De Jesus",
+    "Octavio Marcus San Miguel De Jesus",
+    " "
     ]
     
     
